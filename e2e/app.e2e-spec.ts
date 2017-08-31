@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('hal-test App', () => {
+describe('angular-hal App', () => {
   let page: AppPage;
 
   beforeEach(() => {

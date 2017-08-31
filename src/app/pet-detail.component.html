@@ -1,0 +1,12 @@
+<div *ngIf="pet">
+  <h2>{{pet.name}} details!</h2>
+  <div><label>id: </label>{{pet.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="pet.name" placeholder="name"/>
+  </div>
+  <div>
+    <label>category: </label>
+    <input [(ngModel)]="pet.category" placeholder="category"/>
+  </div>
+</div>
