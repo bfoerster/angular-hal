@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-// import {Document, Navigator} from 'ng-hal';
+import {Document, Navigator} from 'ng-hal';
 
 import {Pet} from './pet';
 import {PETS} from './mock-pets';
@@ -7,15 +7,19 @@ import {PETS} from './mock-pets';
 @Injectable()
 export class PetService {
 
-  // constructor(private navigator: Navigator) {
-  // }
+  constructor(private navigator: Navigator) {
+  }
 
   getPets(): Promise<Pet[]> {
-    // this.navigator
-    //     .get('http://localhost:8000/pets')
-    //     .subscribe(console.log);
 
-    return Promise.resolve(PETS);
+    return new Promise(resolve => {
+      this.navigator.get('/api/pets').subscribe((document: Document) => {
+        console.log(document.resource.link('self'));
+        const allPets = document.resource.embeddedArray('pets');
+
+        resolve(allPets);
+      });
+    });
   }
 
   async getPetsSlowly(): Promise<Pet[]> {
